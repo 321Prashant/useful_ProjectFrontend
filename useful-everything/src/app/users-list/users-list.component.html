@@ -1,0 +1,19 @@
+<p>{{usersList}}</p>
+<table class="table table-striped">
+    <tr>
+        <thead>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Name</th>
+        </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.description}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.userRole}}</td>
+         <td> <button (click)="updateUserEntity(user.userId)">Click to update</button></td>
+        <td><button (click)="deleteUserEntity(user.userId)">Click to delete</button></td>
+        </tr>
+      </tbody>
+    </tr>
+</table>
