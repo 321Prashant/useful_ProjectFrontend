@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { NgChartsModule } from 'ng2-charts';
+import { Chart } from 'chart.js';
+// import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -16,10 +19,13 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     UpdateUserComponent
   ],
   imports: [
+    
+    NgChartsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    // RouterModule.forChild([{ path: '', component: YourPagePage }]),
   ],
   providers: [],
   bootstrap: [AppComponent]

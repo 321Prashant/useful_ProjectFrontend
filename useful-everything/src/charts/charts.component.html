@@ -1,0 +1,43 @@
+<!-- //So from springboot whnever we pass our data object class or entity from controller, we pass it as add.ModelAttribute("Class_key_word_name", that object like students) -->
+
+<!-- <th:block layout:fragment="script">
+<script th:inline="javascript">
+and here in angular we fetch it as var Students = [[$Class_key_word_name]]
+</script>
+</th> -->
+
+<!-- labels will use for x axis basically names for charts and the data inside body of it will be used by y axis basically datasets 10,29 -->'
+
+
+<!-- var transactions_x = expenses.map(x => x["amount"]) these amount and purpose is from student object thta we have fetched into Class_key_word_name
+var transactions_y = expenses.map(x => x["purpose"]) -->
+
+<!-- labels: transactions_x
+datasets:[
+{
+    different kind points:colors rgba{},
+data:transactions_y
+},
+{
+    different kind points:colors rgba{},
+data:transactions_y
+
+}
+] -->
+
+<div class="container">
+
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
+  
+  
+  </div>
