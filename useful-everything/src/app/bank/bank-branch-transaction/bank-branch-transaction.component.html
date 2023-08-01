@@ -1,0 +1,24 @@
+<h2>Bank Branch Transactions</h2>
+
+<!-- Display existing bank branch transactions -->
+<ul>
+  <li *ngFor="let transaction of bankBranchTransactionList">
+    Transaction ID: {{ transaction.bankTransactionId }} | Transaction Date: {{ transaction.transactionDate }} | Amount: {{ transaction.transactioAmount }} | Type: {{ transaction.transactionType }} | Current Balance: {{ transaction.curr_bal }}
+    <ul>
+      <li>Employee Bank Details ID: {{ transaction.empBankDetails.employeeBankDetailsId }} | Account No: {{ transaction.empBankDetails.accountNo }} | Salary Account: {{ transaction.empBankDetails.salaryAccount ? 'Yes' : 'No' }} | Effective Date: {{ transaction.empBankDetails.effDate }}</li>
+    </ul>
+  </li>
+</ul>
+
+<!-- Form to add a new bank branch transaction -->
+<form [formGroup]="newBankBranchTransactionForm" (ngSubmit)="createBankBranchTransaction()">
+  <label for="transactionDate">Transaction Date:</label>
+  <input type="date" id="transactionDate" formControlName="transactionDate">
+  <div *ngIf="newBankBranchTransactionForm.controls['transactionDate'].invalid && newBankBranchTransactionForm.controls['transactionDate'].touched">
+    <div *ngIf="newBankBranchTransactionForm.controls['transactionDate']">Transaction Date is required.</div>
+  </div>
+
+  <!-- ... Other form controls and validation messages ... -->
+
+  <button type="submit" [disabled]="newBankBranchTransactionForm.invalid">Add Bank Branch Transaction</button>
+</form>
