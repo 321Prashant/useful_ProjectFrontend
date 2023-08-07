@@ -5,7 +5,7 @@
   <li *ngFor="let transaction of bankBranchTransactionList">
     Transaction ID: {{ transaction.bankTransactionId }} | Transaction Date: {{ transaction.transactionDate }} | Amount: {{ transaction.transactioAmount }} | Type: {{ transaction.transactionType }} | Current Balance: {{ transaction.curr_bal }}
     <ul>
-      <li>Employee Bank Details ID: {{ transaction.empBankDetails.employeeBankDetailsId }} | Account No: {{ transaction.empBankDetails.accountNo }} | Salary Account: {{ transaction.empBankDetails.salaryAccount ? 'Yes' : 'No' }} | Effective Date: {{ transaction.empBankDetails.effDate }}</li>
+      <!-- <li>Employee Bank Details ID: {{ transaction.empBankDetails.employeeBankDetailsId }} | Account No: {{ transaction.empBankDetails.accountNo }} | Salary Account: {{ transaction.empBankDetails.salaryAccount ? 'Yes' : 'No' }} | Effective Date: {{ transaction.empBankDetails.effDate }}</li> -->
     </ul>
   </li>
 </ul>

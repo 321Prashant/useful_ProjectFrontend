@@ -10,15 +10,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BankBranchTransactionService {
-  private apiUrl = 'https://your-backend-api-url/api/bank-branch-transactions'; 
+  private apiUrl = 'http://localhost:8080/bankTransaction'; 
 
   constructor(private http: HttpClient) { }
 
-  getBankBranchTransactions(): Observable<BankBranchTransaction[]> {
-    return this.http.get<BankBranchTransaction[]>(this.apiUrl);
+  getBankBranchTransactions(accountNumber:string): Observable<BankBranchTransaction[]> {
+    return this.http.get<BankBranchTransaction[]>(`http://localhost:8080/bankTransaction/findLastTenTransactions/${accountNumber}`);
   }
 
   createBankBranchTransaction(bankBranchTransaction: BankBranchTransaction): Observable<BankBranchTransaction> {
-    return this.http.post<BankBranchTransaction>(this.apiUrl, bankBranchTransaction);
+    return this.http.post<BankBranchTransaction>('http://localhost:8080/bankTransaction/makeTransaction', bankBranchTransaction);
   }
 }

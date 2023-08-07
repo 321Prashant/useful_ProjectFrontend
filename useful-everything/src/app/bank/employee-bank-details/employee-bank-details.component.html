@@ -1,42 +1,58 @@
 <h2>Employee Bank Details</h2>
+<!-- If using form ngModel will not allow you, form builder will use for formInit otherwie put standalone for ngOptions-->
 
-<!-- Display existing employee bank details -->
-<ul>
+ <ul>
   <li *ngFor="let employeeBankDetails of employeeBankDetailsList">
     Employee Bank Details ID: {{ employeeBankDetails.employeeBankDetailsId }} | Account No: {{ employeeBankDetails.accountNo }} | Salary Account: {{ employeeBankDetails.salaryAccount ? 'Yes' : 'No' }} | Effective Date: {{ employeeBankDetails.effDate }}
     <ul>
       <li>Bank Branch ID: {{ employeeBankDetails.bankBranchDetails.bankBranchId }} | Country: {{ employeeBankDetails.bankBranchDetails.country }} | City: {{ employeeBankDetails.bankBranchDetails.city }}</li>
     </ul>
+    <ul>
+      <li *ngFor="let employeeBankDetailsTransaction of employeeBankDetails.branchBankTransaction">
+        <ul>
+           
+            <li>transaction date : {{employeeBankDetailsTransaction | json}}</li>
+           </ul>
+      </li> 
+    </ul>
   </li>
-</ul>
+</ul>  
 
-<!-- Form to add a new employee bank details -->
-<form [formGroup]="newEmployeeBankDetailsForm" (ngSubmit)="createEmployeeBankDetails()">
+<!-- [formGroup]="newEmployeeBankDetailsForm"  -->
+<form (submit)="createEmployeeBankDetails()">
+  <div >
   <label for="accountNo">Account No:</label>
-  <input type="text" id="accountNo" formControlName="accountNo">
-  <div *ngIf="newEmployeeBankDetailsForm.controls['accountNo'].invalid && newEmployeeBankDetailsForm.controls['accountNo'].touched">
-    <div *ngIf="newEmployeeBankDetailsForm.controls['accountNo']">Account No is required.</div>
-  </div>
+  <input  type="text" id="accountNo" [(ngModel)]="empBankDetailsDto.accountNo" [ngModelOptions]="{standalone: true}">
+   <div>Account No is required.</div>
+  
 
   <label for="salaryAccount">Salary Account:</label>
-  <input type="checkbox" id="salaryAccount" formControlName="salaryAccount">
-  <div *ngIf="newEmployeeBankDetailsForm.controls['salaryAccount'].invalid && newEmployeeBankDetailsForm.controls['salaryAccount'].touched">
-    <div *ngIf="newEmployeeBankDetailsForm.controls['salaryAccount']">Salary Account is required.</div>
-  </div>
+  <input type="checkbox" id="salaryAccount" [(ngModel)]="empBankDetailsDto.salaryAccount" [ngModelOptions]="{standalone: true}">
+  <div>Salary Account is required.</div>
+  
 
   <label for="effDate">Effective Date:</label>
-  <input type="date" id="effDate" formControlName="effDate">
-  <div *ngIf="newEmployeeBankDetailsForm.controls['effDate'].invalid && newEmployeeBankDetailsForm.controls['effDate'].touched">
-    <div *ngIf="newEmployeeBankDetailsForm.controls['effDate']">Effective Date is required.</div>
-  </div>
+  <input  type="date" id="effDate" [(ngModel)]="empBankDetailsDto.effDate" [ngModelOptions]="{standalone: true}">
+  <div>Effective Date is required.</div>
+  
 
-  <label for="bankBranchDetails">Bank Branch:</label>
-  <select id="bankBranchDetails" formControlName="bankBranchDetails">
-    <option *ngFor="let branch of bankBranchList" [value]="branch">{{ branch.bankBranchId }} - {{ branch.country }} - {{ branch.city }}</option>
-  </select>
-  <div *ngIf="newEmployeeBankDetailsForm.controls['bankBranchDetails'].invalid && newEmployeeBankDetailsForm.controls['bankBranchDetails'].touched">
-    <div *ngIf="newEmployeeBankDetailsForm.controls['bankBranchDetails']">Bank Branch is required.</div>
-  </div>
+  <label for="BankBranchId">Bank branch Id</label>
+  <input type="text" id="effDate" [(ngModel)]="empBankDetailsDto.bankBranchDetailsId" [ngModelOptions]="{standalone: true}">
+  <div>Bank Branch Id is required</div>
+<!--   
+  <label for="BankBranchTrasaction">Bank Branch Transactions:</label>
+  <input class="form-control" type="date" id="effDate" formControlName="effDate">
+  <div>Effective Date is required.</div> -->
 
-  <button type="submit" [disabled]="newEmployeeBankDetailsForm.invalid">Add Employee Bank Details</button>
+  <label hidden="true" for="bankBranchDetails">Transactions:</label>
+  <!-- <select id="bankBranchDetails" formControlName="bankBranchDetails">
+  <option *ngFor="let branch of bankBranchList" [value]="branch">{{ branch.bankBranchId }} - {{ branch.country }} - {{ branch.city }}</option> 
+  </select> -->
+   
+  </div>
+  {{empBankDetailsDto.accountNo}}
+  {{empBankDetailsDto.effDate}}
+  {{empBankDetailsDto.salaryAccount}}
+  {{empBankDetailsDto.bankBranchDetailsId}}
+  <button type="submit">Add Employee Bank Details</button>
 </form>

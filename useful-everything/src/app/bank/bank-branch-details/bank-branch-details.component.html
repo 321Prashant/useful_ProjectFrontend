@@ -1,19 +1,16 @@
 <h2>Bank Branch Details</h2>
-
-<!-- Display existing bank branch details -->
 <ul>
   <li *ngFor="let bankBranchDetails of bankBranchDetailsList">
     Bank Branch ID: {{ bankBranchDetails.bankBranchId }} | Country: {{ bankBranchDetails.country }} | City: {{ bankBranchDetails.city }}
   </li>
 </ul>
 
-<!-- Form to add a new bank branch details -->
-<form (submit)="createBankBranchDetails(newBankBranchDetailsForm.value)">
+<form (submit)="createBankBranchDetails()">
   <label for="country">Country:</label>
-  <input type="text" id="country" name="country" required [(ngModel)]="newBankBranchDetailsForm.country">
+  <input type="text" id="country" name="country" required [(ngModel)]="bankBranchDetails.country">
 
   <label for="city">City:</label>
-  <input type="text" id="city" name="city" required [(ngModel)]="newBankBranchDetailsForm.city">
+  <input type="text" id="city" name="city" required [(ngModel)]="bankBranchDetails.city">
 
   <button type="submit">Add Bank Branch Details</button>
 </form>

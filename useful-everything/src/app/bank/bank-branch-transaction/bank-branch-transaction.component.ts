@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BankBranchTransaction } from 'src/app/bankInterfaces/bank-branch-transaction.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BankBranchTransactionService } from 'src/app/bank_service/bank-branch-transaction.service';
+import { BankBranchTransactionsDto } from '../bank-dto/bank-branch-transactions-dto.model';
 
 @Component({
   selector: 'app-bank-branch-transaction',
@@ -16,43 +17,58 @@ export class BankBranchTransactionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private bankBranchTransactionService: BankBranchTransactionService
   ) { }
-
   ngOnInit(): void {
-    this.initForm();
-    this.loadBankBranchTransactions();
+    throw new Error('Method not implemented.');
   }
 
-  initForm(): void {
-    this.newBankBranchTransactionForm = this.formBuilder.group({
-      transactionDate: ['', Validators.required],
-      transactioAmount: ['', Validators.required],
-      transactionType: ['', Validators.required],
-      curr_bal: ['', Validators.required],
-      empBankDetails: [null, Validators.required]
-    });
+  bankBranchTransactionDto:BankBranchTransactionsDto={
+    transactionDate:new Date(),
+    transactioAmount:0,
+    transactionType:"",
+    
+    curr_bal:0,
+    empBankDetailsId:0
   }
+   accountNumber?: string;
+  
+  // ngOnInit(): void {
+  //   this.initForm();
+  //   this.loadBankBranchTransactions();
+  // }
 
-  loadBankBranchTransactions(): void {
-    this.bankBranchTransactionService.getBankBranchTransactions()
-      .subscribe((transactions: BankBranchTransaction[]) => {
-        this.bankBranchTransactionList = transactions;
-      }, (error) => {
-        console.error('Error loading bank branch transactions:', error);
-      });
-  }
+  // initForm(): void {
+  //   this.newBankBranchTransactionForm = this.formBuilder.group({
+  //     transactionDate: ['', Validators.required],
+  //     transactioAmount: ['', Validators.required],
+  //     transactionType: ['', Validators.required],
+  //     curr_bal: ['', Validators.required],
+  //     empBankDetails: [null, Validators.required]
+  //   });
+  // }
+
+  // loadBankBranchTransactions(){
+  //   this.bankBranchTransactionService.getBankBranchTransactions(this.accountNumber)
+  //     .subscribe((transactions: BankBranchTransaction[]) => {
+  //       this.bankBranchTransactionList = transactions;
+  //     }, (error) => {
+  //       console.error('Error loading bank branch transactions:', error);
+  //     });
+  // }
 
   createBankBranchTransaction(): void {
-    if (this.newBankBranchTransactionForm.invalid) {
-      return;
-    }
+    // if (this.newBankBranchTransactionForm.invalid) {
+    //   return;
+    // }
 
     const newTransaction: BankBranchTransaction = this.newBankBranchTransactionForm.value;
     this.bankBranchTransactionService.createBankBranchTransaction(newTransaction)
       .subscribe((newTransaction: BankBranchTransaction) => {
         this.bankBranchTransactionList.push(newTransaction);
-        this.newBankBranchTransactionForm.reset(); // Reset the form after successful submission
+        // this.newBankBranchTransactionForm.reset(); 
       }, (error) => {
         console.error('Error creating bank branch transaction:', error);
       });
   }
 }
+
+

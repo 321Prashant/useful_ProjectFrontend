@@ -13,7 +13,7 @@ import {  Router } from '@angular/router';
 export class UsersListComponent implements OnInit{
 
   users: Users[] = [];
-usersList='List shown';
+  usersList='List shown';
 
 
 
